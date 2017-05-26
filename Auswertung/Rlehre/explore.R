@@ -139,7 +139,7 @@ par(mai=c(1.02,0.82,0.82,0.42))
 if (save.persistent) svg("notenspiegel.svg")
 notenspiegel <- round(summary(noten)/220*100,0)
 notenplot <- barplot(notenspiegel, main="Notenverteilung in Prozent\nohne Aufgabe 8 (n=220)", ylim=c(0,16),
-                     xlab = "Schulnote", ylab = "Anteil")
+                     xlab = "Note", ylab = "Anteil")
 text(notenplot, notenspiegel+0.5, labels = paste(notenspiegel, "%", sep=""))
 if (save.persistent) dev.off()
 
