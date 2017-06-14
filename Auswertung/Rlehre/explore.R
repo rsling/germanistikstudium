@@ -5,7 +5,7 @@ require(rgdal)
 require(beanplot)
 
 # Set this TRUE for file output, FALSE for screen.
-save.persistent <- F
+save.persistent <- T
 
 if (save.persistent) sink("results.txt", append=F)
 cat(" Wie viel Grammatik braucht das Germanistikstudium?\n",
@@ -87,10 +87,10 @@ par(mai=c(1.02,0.82,0.82,0.42))
 
 
 if (save.persistent) svg("prozentverteilung.svg")
-lwd <- 1
+lwd <- 2
 
 par(mfrow=c(3,4))
-par(mai=c(0.5,0.4,0.4,0.2))
+par(mai=c(0.5,0.4,0.4,0))
 
 succ.cex = 0.8
 
@@ -98,29 +98,32 @@ plot(density(evals[,"Gesamt"]),
      main="Gesamtergebnis (ohne Aufgabe 8)", lwd=lwd, col="darkblue", 
      xaxt = "n", ylab = "", xlab = "", bty = "n",
      cex.main = succ.cex, cex.axis = succ.cex, cex.lab = succ.cex,
-     ylim=c(0, max(density(evals[,"Gesamt"])$y)*1.15))
+     ylim=c(0, max(density(evals[,"Gesamt"])$y)*1.275))
 axis(1, seq(10,100,10), seq(10,100,10), cex.axis = succ.cex)
 meen <- mean(evals[,"Gesamt"])
 meen.den <- density(evals[,"Gesamt"], from=meen, to=meen, n=1)$y
+medyan <- median(evals[,"Gesamt"])
 lines(c(meen, meen), c(0, meen.den), col="darkgreen",
       lwd=lwd, lty=1)
-legend("topleft", legend = paste("Mittel=", round(meen,2), sep=""), bty = "n", cex=succ.cex)
+legend("topleft", legend = c(paste0("Mittel=", round(meen,2)), paste0("Median=", round(medyan,2))), bty = "n", cex=succ.cex)
 
 for (exercise in 1:11) {
   meen <- mean(evals[,exercise])
   meen.den <- density(evals[,exercise], from=meen, to=meen, n=1)$y
+  medyan <- median(evals[, exercise])
   
   plot(density(evals[,exercise]),
        main=paste("[", exercise, "] ", themen[exercise], sep=""), lwd=lwd,
        col="darkblue", xlim=c(0,100),
        xaxt = "n", ylab = "", xlab = "", bty = "n",
        cex.main = succ.cex, cex.axis = succ.cex, cex.lab = succ.cex,
-       ylim=c(0, max(density(evals[,exercise])$y)*1.15))
+       ylim=c(0, max(density(evals[,exercise])$y)*1.275))
   axis(1, seq(0,100,10), seq(0,100,10), cex.axis = succ.cex)
 
   lines(c(meen, meen), c(0, meen.den), col="darkgreen",
         lwd=lwd, lty=1)
-  legend("topleft", legend = paste("Mittel=", round(meen,2), sep=""), bty = "n", cex=succ.cex)
+  legend("topleft", legend = c(paste0("Mittel=", round(meen,2)), paste0("Median=", round(medyan,2))), bty = "n", cex=succ.cex)
+#  legend("topleft", legend = paste("Mittel=", round(meen,2), sep=""), bty = "n", cex=succ.cex)
 }
 
 par(mfrow=c(1,1))
