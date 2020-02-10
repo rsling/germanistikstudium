@@ -6,4 +6,5 @@ Zeitschrift für germanistische Linguistik, submitted 2016 https://www.degruyter
 The data is release under CC-BY 3.0
 https://creativecommons.org/licenses/by/3.0/
 
-Roland Schäfer <mail@rolandschaefer.net>
+Roland Schäfer
+http://rolandschaefer.net
